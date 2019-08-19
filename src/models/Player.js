@@ -1,8 +1,7 @@
 export default class Player {
-  constructor(name, deck) {
+  constructor(name) {
     this.hand = []
     this.name = name
-    this.deck = deck
   }
 
   addToHand(card) {

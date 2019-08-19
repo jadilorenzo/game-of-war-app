@@ -7,8 +7,22 @@ export default class Game {
     this.cards = []
     this.deck = new Deck()
     this.setDeck()
-    this.player1 = new Player(name1, this.cards)
-    this.player2 = new Player(name2, this.cards)
+    this.player1 = new Player(name1)
+    this.player2 = new Player(name2)
+    this.deal()
+  }
+
+  deal() {
+    for (var i = 0; i < 26; i++) {
+      this.giveCardToPlayer(this.player1)
+    }
+    for (var j = 0; i < 26; j++) {
+      this.giveCardToPlayer(this.player2)
+    }
+  }
+
+  playCard() {
+
   }
 
   setDeck() {
@@ -35,12 +49,12 @@ export default class Game {
 
   }
 
-  getRandomCard(cardNum = this.getRandomInt(this.deck.all.length + 1)) {
+  getRandomCard(cardNum = this.getRandomInt(this.cards.length + 1)) {
     const index = cardNum
 
-    const missingCard = this.deck.all[index]
+    const missingCard = this.cards[index]
 
-    this.deck.all = this.remove(this.deck.all, index)
+    this.cards = this.remove(this.cards, index)
     this.setDeck()
 
 

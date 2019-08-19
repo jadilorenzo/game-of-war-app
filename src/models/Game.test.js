@@ -5,6 +5,7 @@ describe('game', () => {
 
   it('creates cards', () => {
     const game = new Game()
+    game.setDeck()
     expect(game.cards.length).toStrictEqual(52)
   })
 
@@ -15,16 +16,15 @@ describe('game', () => {
     expect(arr).toStrictEqual(['hello', [], {}])
   })
 
-  it('has the ability to remove from the deck', () => {
-    const game = new Game()
-    game.getRandomCard()
-    expect(game.cards.length).toBe(51)
-  })
-
   it('can give a card to a player', () => {
     const game = new Game()
     const player = new Player('name1', game.cards)
     game.giveCardToPlayer(player)
     expect(player.hand).not.toBe([])
+  })
+
+  it('will split the deck at the beggining of the game', () => {
+    const game = new Game()
+    expect(game.player1.hand.length).toBe(52/2)
   })
 })
