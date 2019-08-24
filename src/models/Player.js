@@ -7,4 +7,10 @@ export default class Player {
   addToHand(card) {
     this.hand.push(card)
   }
+
+  selectCard(index, player) {
+    this.hand[index].isPlayed = true
+    this.hand[index].belongsTo = player
+    return this.hand[index]
+  }
 }
