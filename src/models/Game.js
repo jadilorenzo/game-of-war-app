@@ -26,10 +26,11 @@ export default class Game {
     if (this.cardsInPlay.length >= 2) {
       this.cardsInPlay = []
     }
+    player.removeFromHand(index)
     this.cardsInPlay.push(player.selectCard(index, player))
   }
 
-  findWin() {
+  findWin(tie) {
     this.hashForFindWin = {
       'H-A' : 20, 'H-K' : 13, 'H-Q' : 12, 'H-J' : 11, 'H-10' : 10,'H-9' : 9, 'H-8' : 8, 'H-7' : 7, 'H-6' : 6, 'H-5' : 5, 'H-4' : 4, 'H-3' : 3,'H-2' : 2,
       'D-A' : 20, 'D-K' : 13, 'D-Q' : 12, 'D-J' : 11, 'D-10' : 10,'D-9' : 9, 'D-8' : 8, 'D-7' : 7, 'D-6' : 6, 'D-5' : 5, 'D-4' : 4, 'D-3' : 3,'D-2' : 2,
@@ -41,16 +42,45 @@ export default class Game {
       let card2 = null
       card1 = this.cardsInPlay[0]
       card2 = this.cardsInPlay[1]
-      // console.log(card1);
-      // console.log(card2);
+      // this.cardsInPlay = []
       if (this.hashForFindWin[card1.type] > this.hashForFindWin[card2.type]) {
-        this.giveCardToPlayer(card1.belongsTo, card1)
-        this.giveCardToPlayer(card1.belongsTo, card2)
+        if (tie) {
+          this.giveCardToPlayer(card1.belongsTo, card1)
+          this.giveCardToPlayer(card1.belongsTo, card2)
+          this.giveCardToPlayer(card1.belongsTo, this.cardsInPlay[2])
+          this.giveCardToPlayer(card1.belongsTo, this.cardsInPlay[3])
+          this.giveCardToPlayer(card1.belongsTo, this.cardsInPlay[4])
+          this.giveCardToPlayer(card1.belongsTo, this.cardsInPlay[5])
+          this.giveCardToPlayer(card1.belongsTo, this.cardsInPlay[6])
+          this.giveCardToPlayer(card1.belongsTo, this.cardsInPlay[7])
+        } else {
+          this.giveCardToPlayer(card1.belongsTo, card1)
+          this.giveCardToPlayer(card1.belongsTo, card2)
+        }
         return card1.belongsTo
       } else if (this.hashForFindWin[card1.type] < this.hashForFindWin[card2.type]) {
-        this.giveCardToPlayer(card2.belongsTo, card1)
-        this.giveCardToPlayer(card2.belongsTo, card2)
+        if (tie) {
+          this.giveCardToPlayer(card2.belongsTo, card1)
+          this.giveCardToPlayer(card2.belongsTo, card2)
+          this.giveCardToPlayer(card2.belongsTo, this.cardsInPlay[2])
+          this.giveCardToPlayer(card2.belongsTo, this.cardsInPlay[3])
+          this.giveCardToPlayer(card2.belongsTo, this.cardsInPlay[4])
+          this.giveCardToPlayer(card2.belongsTo, this.cardsInPlay[5])
+          this.giveCardToPlayer(card2.belongsTo, this.cardsInPlay[6])
+          this.giveCardToPlayer(card2.belongsTo, this.cardsInPlay[7])
+        } else {
+          this.giveCardToPlayer(card2.belongsTo, card1)
+          this.giveCardToPlayer(card2.belongsTo, card2)
+        }
         return card2.belongsTo
+      } else {
+        this.playCard(this.player1, 0)
+        this.playCard(this.player2, 0)
+        this.playCard(this.player1, 0)
+        this.playCard(this.player2, 0)
+        this.playCard(this.player1, 0)
+        this.playCard(this.player2, 0)
+        return this.findWin(true)
       }
     }
   }

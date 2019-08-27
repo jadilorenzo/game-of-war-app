@@ -13,4 +13,23 @@ export default class Player {
     this.hand[index].belongsTo = player
     return this.hand[index]
   }
+
+  remove(arr, index) {
+    // expand all previous position
+    const arrBeforeIndex = arr.slice(0, index)
+    // expand remaining positions
+    const arrAfterIndex = arr.slice((index + 1), arr.length)
+
+    return [
+      ...arrBeforeIndex,
+      ...arrAfterIndex
+    ];
+
+  }
+
+  removeFromHand(index) {
+    this.hand = this.remove(this.hand, index)
+  }
+
+
 }

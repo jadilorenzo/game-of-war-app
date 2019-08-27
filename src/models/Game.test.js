@@ -56,4 +56,13 @@ describe('game', () => {
     expect((game.findWin().name === 'player1') || (game.findWin().name === 'player2')).toBe(true)
   })
 
+  it('will determine a tie', () => {
+    const game = new Game('player1', 'player2')
+    // game.playCard(game.player1, 0)
+    let card1 = {type: 'H-K', belongsTo: game.player1}
+    let card2 = {type: 'D-K', belongsTo: game.player2}
+    game.cardsInPlay = [card1, card2]
+    expect(game.findWin().hand.length).toBe(52/2 + 8 - 3)
+  })
+
 })

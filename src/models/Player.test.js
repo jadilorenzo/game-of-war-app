@@ -20,4 +20,11 @@ describe('player', () => {
     player.addToHand(new Card('H-A'))
     expect(player.selectCard(0).type).toStrictEqual('H-A')
   })
+
+  it('can remove a card', () => {
+    const player = new Player('shellwords')
+    player.addToHand(new Card('H-A'))
+    player.removeFromHand(0)
+    expect(player.hand.length).toStrictEqual(0)
+  })
 })
