@@ -30,7 +30,7 @@ export default class Game {
     this.cardsInPlay.push(player.selectCard(index, player))
   }
 
-  findWin(tie) {
+  findWhichCardWins(tie) {
     this.hashForFindWin = {
       'H-A' : 20, 'H-K' : 13, 'H-Q' : 12, 'H-J' : 11, 'H-10' : 10,'H-9' : 9, 'H-8' : 8, 'H-7' : 7, 'H-6' : 6, 'H-5' : 5, 'H-4' : 4, 'H-3' : 3,'H-2' : 2,
       'D-A' : 20, 'D-K' : 13, 'D-Q' : 12, 'D-J' : 11, 'D-10' : 10,'D-9' : 9, 'D-8' : 8, 'D-7' : 7, 'D-6' : 6, 'D-5' : 5, 'D-4' : 4, 'D-3' : 3,'D-2' : 2,
@@ -80,7 +80,7 @@ export default class Game {
         this.playCard(this.player2, 0)
         this.playCard(this.player1, 0)
         this.playCard(this.player2, 0)
-        return this.findWin(true)
+        return this.findWhichCardWins(true)
       }
     }
   }
@@ -124,5 +124,13 @@ export default class Game {
 
   giveCardToPlayer(player, card = this.getRandomCard(player)) {
     player.addToHand(card)
+  }
+
+  isGameOver() {
+    if ((this.player1.hand.length === 52)|| (this.player2.hand.length === 52)) {
+      return true
+    } else {
+      return false
+    }
   }
 }
