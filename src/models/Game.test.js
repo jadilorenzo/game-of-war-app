@@ -1,5 +1,6 @@
 import Game from '../models/Game';
 import Player from '../models/Player';
+import Card from '../models/Card';
 
 describe('game', () => {
 
@@ -14,6 +15,11 @@ describe('game', () => {
     let arr = [null, 'hello', [], {}]
     arr = game.remove(arr, 0)
     expect(arr).toStrictEqual(['hello', [], {}])
+  })
+
+  it('has cards', () => {
+    const game = new Game('player1', 'player2')
+    expect(game.cards).not.toBe([])
   })
 
   it('can give a card to a player', () => {
@@ -58,9 +64,13 @@ describe('game', () => {
 
   it('will determine a tie', () => {
     const game = new Game('player1', 'player2')
-    // game.playCard(game.player1, 0)
-    let card1 = {type: 'H-K', belongsTo: game.player1}
-    let card2 = {type: 'D-K', belongsTo: game.player2}
+
+    let card1 = new Card('K', 'H')
+    card1.belongsTo = game.player1
+
+    let card2 = new Card('K', 'C')
+    card1.belongsTo = game.player1
+
     game.cardsInPlay = [card1, card2]
     expect(game.findWhichCardWins().hand.length).toBe(52/2 + 8 - 3)
   })

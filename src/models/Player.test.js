@@ -17,8 +17,8 @@ describe('player', () => {
 
   it('can select a card to play', () => {
     const player = new Player('shellwords')
-    player.addToHand(new Card('H-A'))
-    expect(player.selectCard(0).type).toStrictEqual('H-A')
+    player.addToHand(new Card('A','H'))
+    expect(player.selectCard(0).rank).toStrictEqual('A')
   })
 
   it('can remove a card', () => {

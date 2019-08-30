@@ -1,6 +1,11 @@
 import Card from '../models/Card';
 
-it('card has type', () => {
-  const card = new Card('H-A')
-  expect(card.type).toBe('H-A')
+it('card has rank', () => {
+  const card = new Card('K', 'H')
+  expect(card.rank).toBe('K')
+});
+
+it('card has suite', () => {
+  const card = new Card('K', 'H')
+  expect(card.suite).toBe('H')
 });
